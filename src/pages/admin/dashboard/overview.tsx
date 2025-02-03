@@ -2,13 +2,13 @@ import { formatCurrencyVND } from "@/lib/currency";
 import { TrendingDown, TrendingUp } from "lucide-react";
 
 const data = {
-  totalSales: 510_000_000,
-  lastTotalSales: 451_000_000,
-  totalOrders: 12_499,
-  lastTotalOrders: 10_407,
-  numOfvisitors: 12_499,
+  totalSales: 80_000_000,
+  lastTotalSales: 71_000_000,
+  totalOrders: 12_000,
+  lastTotalOrders: 9_407,
+  numOfvisitors: 72_499,
   lastNumOfVisitors: 14_358,
-  numOfRefunded: 1_499,
+  numOfRefunded: 2_300,
   lastNumOfRefunded: 1326,
 };
 const Card = ({

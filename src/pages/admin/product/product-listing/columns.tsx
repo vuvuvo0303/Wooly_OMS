@@ -76,8 +76,23 @@ export const columns: ColumnDef<Product>[] = [
       );
     },
   },
+  // {
+  //   accessorKey: "brandName",
+  //   header: ({ column }) => {
+  //     return (
+  //       <Button
+  //         variant="ghost"
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+  //         className="p-0 m-0 w-full justify-start"
+  //       >
+  //         Thương hiệu
+  //         <ArrowUpDown className="ml-2 h-4 w-4" />
+  //       </Button>
+  //     );
+  //   },
+  // },
   {
-    accessorKey: "brandName",
+    accessorKey: "stockQuantity",
     header: ({ column }) => {
       return (
         <Button
@@ -85,7 +100,7 @@ export const columns: ColumnDef<Product>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="p-0 m-0 w-full justify-start"
         >
-          Thương hiệu
+          Số lượng tồn kho
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -100,7 +115,7 @@ export const columns: ColumnDef<Product>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="p-0 m-0 w-full justify-start"
         >
-          s.lg tồn kho
+          Số lượng đã bán
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );

@@ -13,11 +13,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
-import guitarImage1 from "@/assets/images/guitar_1.png";
-import guitarImage2 from "@/assets/images/guitar_2.png";
-import guitarImage3 from "@/assets/images/guitar_3.png";
-import guitarImage4 from "@/assets/images/guitar_4.png";
-import guitarImage5 from "@/assets/images/guitar_5.png";
+import len1 from "@/assets/images/len1.jpg";
+import len2 from "@/assets/images/len2.jpg";
+import len3 from "@/assets/images/len3.jpeg";
+import len4 from "@/assets/images/len4.jpg";
+import len5 from "@/assets/images/len5.jpeg";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "@/components/ui/badge";
@@ -26,40 +26,40 @@ const bestSellingProducts = [
   {
     id: 1,
     productName:
-      "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
-    image: guitarImage1,
+      "Móc khóa len",
+    image: len1,
     numOfOrders: 12,
     percentage: 8.3,
   },
   {
     id: 2,
     productName:
-      "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
-    image: guitarImage2,
+      "Thú len bông",
+    image: len2,
     numOfOrders: 10,
     percentage: 6.2,
   },
   {
     id: 3,
     productName:
-      "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
-    image: guitarImage3,
+      "Hoa len",
+    image: len3,
     numOfOrders: 8,
     percentage: 3.12,
   },
   {
     id: 4,
     productName:
-      "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
-    image: guitarImage4,
+      "Nón len",
+    image: len4,
     numOfOrders: 8,
     percentage: 3.12,
   },
   {
     id: 5,
     productName:
-      "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
-    image: guitarImage5,
+      "Trái cây len",
+    image: len5,
     numOfOrders: 6,
     percentage: 2.6,
   },

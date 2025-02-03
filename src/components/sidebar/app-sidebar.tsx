@@ -12,7 +12,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-
+import Wooly_logo from "@/assets/images/wooly_logo.png";
 const data = {
   user: {
     name: "Admin",
@@ -50,18 +50,18 @@ const data = {
           title: "Danh mục hàng hóa",
           url: "/category",
         },
-        {
-          title: "Thương hiệu",
-          url: "/brand",
-        },
+        // {
+        //   title: "Thương hiệu",
+        //   url: "/brand",
+        // },
         {
           title: "Giảm giá, ưu đãi",
           url: "/sale",
         },
-        {
-          title: "Carousel",
-          url: "/carousel",
-        },
+        // {
+        //   title: "Carousel",
+        //   url: "/carousel",
+        // },
         {
           title: "Phương thức vận chuyển",
           url: "/shipment",
@@ -109,7 +109,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem className="flex gap-2">
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-zinc-700 text-sidebar-primary-foreground">
-              <img src="/electric-guitar.png" className="size-4" />
+              <img src={Wooly_logo} className="size-4" />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-semibold">Innovibe</span>

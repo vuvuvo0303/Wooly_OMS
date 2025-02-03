@@ -1,5 +1,5 @@
-import guitarImage1 from "@/assets/images/guitar_1.png";
-import guitarImage2 from "@/assets/images/guitar_2.png";
+import len1 from "@/assets/images/len1.jpg";
+import len2 from "@/assets/images/len2.jpg";
 import { Order } from "@/types/order";
 export const guitarOrders: Order[] = [
     {
@@ -21,7 +21,7 @@ export const guitarOrders: Order[] = [
                     "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
                 status: "Available",
                 price: 10_000_000,
-                image: guitarImage1,
+                image: len1,
                 quantity: 1,
                 category: "Electric guitar"
             },
@@ -31,7 +31,7 @@ export const guitarOrders: Order[] = [
                     "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
                 status: "Available",
                 price: 10_000_000,
-                image: guitarImage1,
+                image: len2,
                 quantity: 1,
                 category: "Electric guitar"
             }
@@ -58,7 +58,7 @@ export const guitarOrders: Order[] = [
                     "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
                 status: "Available",
                 price: 10_000_000,
-                image: guitarImage2,
+                image: len2,
                 quantity: 2,
                 category: "Electric guitar"
 
@@ -86,7 +86,7 @@ export const guitarOrders: Order[] = [
                     "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
                 status: "Available",
                 price: 11_100_000,
-                image: guitarImage2,
+                image: len2,
                 quantity: 1,
                 category: "Electric guitar"
 
@@ -114,7 +114,7 @@ export const guitarOrders: Order[] = [
                     "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
                 status: "Available",
                 price: 11_100_000,
-                image: guitarImage2,
+                image: len2,
                 quantity: 1,
                 category: "Electric guitar"
 
@@ -142,7 +142,7 @@ export const guitarOrders: Order[] = [
                     "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
                 status: "Available",
                 price: 11_100_000,
-                image: guitarImage2,
+                image: len2,
                 quantity: 1,
                 category: "Electric guitar"
 
@@ -170,7 +170,7 @@ export const guitarOrders: Order[] = [
                     "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
                 status: "Available",
                 price: 11_100_000,
-                image: guitarImage2,
+                image: len2,
                 quantity: 1,
                 category: "Electric guitar"
 
