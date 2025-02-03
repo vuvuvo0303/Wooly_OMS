@@ -1,13 +1,6 @@
 import { PasswordInput } from "@/components/password-input";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -37,10 +30,7 @@ const LoginPage = () => {
     navigate("/");
   };
   return (
-    <div
-      className="grid grid-cols-12"
-      style={{ backgroundImage: `url(${loginBackground})`, backgroundSize: "cover" }}
-    >
+    <div className="grid grid-cols-12" style={{ backgroundImage: `url(${loginBackground})`, backgroundSize: "cover" }}>
       <div className="col-span-6 h-screen overflow-auto rounded-e shadow-md bg-white">
         <div className="bg-white min-h-screen py-16 px-24">
           <Form {...form}>
@@ -57,12 +47,7 @@ const LoginPage = () => {
                       Email <span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Nhập địa chỉ email"
-                        type="email"
-                        className="py-6"
-                        {...field}
-                      />
+                      <Input placeholder="Nhập địa chỉ email" type="email" className="py-6" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -77,11 +62,7 @@ const LoginPage = () => {
                       Password <span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl>
-                      <PasswordInput
-                        placeholder="Nhập mật khẩu"
-                        className="py-6"
-                        {...field}
-                      />
+                      <PasswordInput placeholder="Nhập mật khẩu" className="py-6" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
