@@ -12,7 +12,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import Wooly_logo from "@/assets/images/wooly_logo.png";
+import wooly_logo from "@/assets/images/wooly_logo.png";
 const data = {
   user: {
     name: "Admin",
@@ -109,7 +109,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem className="flex gap-2">
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg  text-sidebar-primary-foreground">
-              <img src={Wooly_logo} className="size-11" />
+              <img src={wooly_logo} className="size-11" />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-semibold">Innovibe OMS</span>
