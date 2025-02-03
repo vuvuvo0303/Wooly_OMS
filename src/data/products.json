@@ -77,7 +77,7 @@
     "stockQuantity": 10,
     "categoryName": "Loai 2",
     "brandName": "Ibanez",
-    "status": "In Transit",
+    "status": "Out of Stock",
     "productImages": [
       {
         "id": 401,

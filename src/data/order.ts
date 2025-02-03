@@ -20,7 +20,7 @@ export const guitarOrders: Order[] = [
                 productName:
                     "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
                 status: "Available",
-                price: 10_000_000,
+                price: 500_000,
                 image: len1,
                 quantity: 1,
                 category: "Electric guitar"
@@ -30,7 +30,7 @@ export const guitarOrders: Order[] = [
                 productName:
                     "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
                 status: "Available",
-                price: 10_000_000,
+                price: 500_000,
                 image: len2,
                 quantity: 1,
                 category: "Electric guitar"
