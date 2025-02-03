@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
-import logoImage from "@/assets/images/electric-guitar.png";
+import Wooly_logo from "@/assets/images/wooly_logo.png";
 import googleLogo from "@/assets/images/google.webp";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
@@ -45,7 +45,7 @@ const LoginPage = () => {
         <div className="bg-white min-h-screen py-16 px-24">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
-              <img src={logoImage} alt="" width={70} />
+              <img src={Wooly_logo} alt="" width={70} />
               <h2 className="text-4xl font-bold mt-5">Đăng Nhập</h2>
               <p className="py-2">Innovibe Order Management System</p>
               <FormField

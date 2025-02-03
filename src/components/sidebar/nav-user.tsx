@@ -25,7 +25,7 @@ export function NavUser({
   const { isMobile } = useSidebar();
   const navigate = useNavigate();
   const handleLogout = () => {
-    navigate("/log-in");
+    navigate("/login");
   };
   return (
     <SidebarMenu>
