@@ -1,16 +1,15 @@
-import { Button } from "./components/ui/button"
-
+import { Route, Routes } from "react-router-dom";
+import { Button } from "./components/ui/button";
 
 function App() {
-
   return (
     <>
-     <h1 className="text-4xl font-bold underline">
-      Hello world!
-    </h1>
-    <Button>Click me</Button>
+      <Routes>
+        <Route path="log-in" element={<LoginPage />} />
+        <Route path="/*" element={<MainContainter />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
