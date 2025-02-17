@@ -74,7 +74,7 @@ const BestSelling = () => {
         <CardHeader>
           <CardTitle className="text-lg">Sản phẩm bán chạy</CardTitle>
           <CardDescription>
-            <Select value={month} onValueChange={(value) => setMonth(value)}>
+            {/* <Select value={month} onValueChange={(value) => setMonth(value)}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Chọn tháng" />
               </SelectTrigger>
@@ -87,7 +87,7 @@ const BestSelling = () => {
                   );
                 })}
               </SelectContent>
-            </Select>
+            </Select> */}
           </CardDescription>
         </CardHeader>
         <CardContent>

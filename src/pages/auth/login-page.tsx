@@ -11,13 +11,14 @@ import wooly_logo from "@/assets/images/wooly_logo.png";
 // import { Checkbox } from "@/components/ui/checkbox";
 // import { useState } from "react";
 import loginbg from "@/assets/images/loginbg.png";
+import { login } from "@/lib/api/auth-api";
+import { toast } from "react-toastify";
 const formSchema = z.object({
   email: z.string().email("Email không hợp lệ"),
-  password: z.string().min(5, "Mật khẩu phải chứa ít nhất 5 ký tự"),
+  password: z.string().min(3, "Mật khẩu phải chứa ít nhất 3 ký tự"),
 });
 const LoginPage = () => {
   const navigate = useNavigate();
-  // const [rememberMe, setRememberMe] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -25,8 +26,17 @@ const LoginPage = () => {
       password: "",
     },
   });
-  const handleSubmit = () => {
-    // console.log("Remember me: " + rememberMe);
+  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    const loginResult = await login(values.email, values.password);
+    if (loginResult.error) {
+      form.setError("email", { message: loginResult.error });
+      toast.error(loginResult.error.message);
+      return;
+    } else {
+      localStorage.setItem("accessToken", loginResult.data.accessToken);
+      toast.success("Đăng nhập thành công");
+      
+    }
     navigate("/");
   };
   return (
@@ -37,7 +47,7 @@ const LoginPage = () => {
             <form onSubmit={form.handleSubmit(handleSubmit)}>
               <img src={wooly_logo} alt="" width={70} />
               <h2 className="text-4xl font-bold mt-5">Đăng Nhập</h2>
-              <p className="py-2">Innovibe Order Management System</p>
+              <p className="py-2">Wooly Order Management System</p>
               <FormField
                 control={form.control}
                 name="email"
@@ -96,8 +106,6 @@ const LoginPage = () => {
               </Button>
             </form>
           </Form>
-        
-      
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { formatCurrencyVND } from "@/lib/currency";
-import { TrendingDown, TrendingUp } from "lucide-react";
+// import { TrendingDown, TrendingUp } from "lucide-react";
 
 const data = {
   totalSales: 80_000_000,
@@ -14,17 +14,17 @@ const data = {
 const Card = ({
   value,
   title,
-  incrementalPercentage,
+  // incrementalPercentage,
 }: {
   value: string;
   title: string;
   incrementalPercentage: number;
 }) => {
   return (
-    <div className="col-span-3 bg-white rounded-lg p-3 shadow">
+    <div className="col-span-3 bg-white rounded-lg p-8 shadow">
       <h3 className="text-sm">{title}</h3>
       <p className="text-2xl font-bold py-3">{value}</p>
-      <div className="flex gap-5 text-xs items-center">
+      {/* <div className="flex gap-5 text-xs items-center">
         {incrementalPercentage > 0 ? (
           <div className="text-green-600 flex gap-2 items-center">
             <TrendingUp />
@@ -37,7 +37,7 @@ const Card = ({
           </div>
         )}
         <div>So với tháng trước</div>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -52,7 +52,7 @@ const Overview = () => {
   return (
     <>
       <Card
-        title="Tổng doanh thu"
+        title="Tổng doanh thu toàn hệ thống"
         value={formatCurrencyVND(data.totalSales)}
         incrementalPercentage={calculatePercentageIncrement(
           data.lastTotalSales,
@@ -68,7 +68,7 @@ const Overview = () => {
         )}
       />
       <Card
-        title="Tổng lượt truy cập"
+        title="Tổng lượt tài khoản người dùng"
         value={data.numOfvisitors.toLocaleString()}
         incrementalPercentage={calculatePercentageIncrement(
           data.lastNumOfVisitors,
@@ -76,7 +76,7 @@ const Overview = () => {
         )}
       />
       <Card
-        title="Tổng lượt hoàn trả"
+        title="Doanh thu trong ngày"
         value={data.numOfRefunded.toLocaleString()}
         incrementalPercentage={calculatePercentageIncrement(
           data.lastNumOfRefunded,

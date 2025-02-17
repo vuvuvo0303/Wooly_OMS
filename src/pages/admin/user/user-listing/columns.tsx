@@ -82,16 +82,11 @@ export const columns: ColumnDef<User>[] = [
       if (user.role == "Admin") {
         return <Badge className="bg-blue-600 hover:bg-blue-500">Admin</Badge>;
       }
-      if (user.role == "Customer") {
+      if (user.role == "CUSTOMER") {
         return (
           <Badge className="bg-orange-600 hover:bg-orange-500">
             Khách hàng
           </Badge>
-        );
-      }
-      if (user.role == "Staff") {
-        return (
-          <Badge className="bg-green-600 hover:bg-green-500">Nhân viên</Badge>
         );
       }
       return <Badge>{user.role}</Badge>;

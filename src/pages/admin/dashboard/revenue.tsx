@@ -43,7 +43,7 @@ const Revenue = () => {
   return (
     <Card className="col-span-8">
       <CardHeader>
-        <CardTitle className="text-lg">Thống kê doanh thu</CardTitle>
+        <CardTitle className="text-lg">Thống kê số đơn và doanh thu theo tháng</CardTitle>
         <CardDescription className="flex gap-5">
           <div className="flex gap-2 items-center">
             <div className="size-3 bg-[hsl(var(--chart-1))] rounded-sm"></div>{" "}
@@ -51,7 +51,7 @@ const Revenue = () => {
           </div>
           <div className="flex gap-2 items-center">
             <div className="size-3 bg-[hsl(var(--chart-2))] rounded-sm"></div>{" "}
-            Mục tiêu
+          Số đơn
           </div>
         </CardDescription>
       </CardHeader>

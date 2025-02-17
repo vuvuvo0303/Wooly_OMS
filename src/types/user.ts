@@ -1,11 +1,11 @@
 export type User = {
   id: number;
   email: string;
-  fullName: string;
+  name: string;
   phoneNumber: string;
   avatar: string;
-  role: "Customer" | "Admin" | "Staff";
-  status: "Active" | "Inactive";
-  createdAt: string;
-  updatedAt: string;
+  gender:string;
+  role: "CUSTOMER" | "ADMIN" ;
+//   createdAt: string;
+//   updatedAt: string;
 };

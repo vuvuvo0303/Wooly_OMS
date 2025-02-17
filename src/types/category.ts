@@ -1,7 +1,6 @@
 export type Category = {
-    id: number;
-    categoryName: string;
-    totalProducts: number;
-    createdAt: string;
-    updatedAt: string;
-}
+  categoryID: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+};

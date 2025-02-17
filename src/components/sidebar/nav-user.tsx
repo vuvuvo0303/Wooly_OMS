@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "@/store/AuthStore";
 
 export function NavUser({
   user,
@@ -22,6 +23,7 @@ export function NavUser({
     avatar: string;
   };
 }) {
+  const loggedUser = useAuthStore((state) => state.user);
   const { isMobile } = useSidebar();
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -60,8 +62,14 @@ export function NavUser({
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  {loggedUser ? (
+                    <>
+                      <span className="truncate font-semibold">{loggedUser.name}</span>
+                      <span className="truncate text-xs">{loggedUser.gender}</span>
+                    </>
+                  ) : (
+                    <span className="truncate text-xs">User not logged in</span>
+                  )}
                 </div>
               </div>
             </DropdownMenuLabel>
@@ -69,7 +77,7 @@ export function NavUser({
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <BadgeCheck />
-                Tải khoản
+                Tài khoản
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

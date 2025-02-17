@@ -13,6 +13,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import wooly_logo from "@/assets/images/wooly_logo.png";
+
 const data = {
   user: {
     name: "Admin",
@@ -47,25 +48,25 @@ const data = {
           url: "/order",
         },
         {
-          title: "Danh mục hàng hóa",
+          title: "Loại sản phẩm len",
           url: "/category",
         },
         // {
         //   title: "Thương hiệu",
         //   url: "/brand",
         // },
-        {
-          title: "Giảm giá, ưu đãi",
-          url: "/sale",
-        },
+        // {
+        //   title: "Giảm giá, ưu đãi",
+        //   url: "/sale",
+        // },
         // {
         //   title: "Carousel",
         //   url: "/carousel",
         // },
-        {
-          title: "Phương thức vận chuyển",
-          url: "/shipment",
-        },
+        // {
+        //   title: "Phương thức vận chuyển",
+        //   url: "/shipment",
+        // },
       ],
     },
     {
@@ -112,7 +113,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <img src={wooly_logo} className="size-11" />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-semibold">Innovibe OMS</span>
+              <span className="truncate font-semibold">Wooly OMS</span>
               <span className="truncate text-blue-300 text-xs">Wooly studio</span>
             </div>
           </SidebarMenuItem>
