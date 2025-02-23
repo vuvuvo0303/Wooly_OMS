@@ -1,20 +1,22 @@
+import { useEffect, useState } from "react";
+import { getStatics } from "@/lib/api/statics-api";
 import { formatCurrencyVND } from "@/lib/currency";
-// import { TrendingDown, TrendingUp } from "lucide-react";
 
-const data = {
-  totalSales: 80_000_000,
-  lastTotalSales: 71_000_000,
-  totalOrders: 12_000,
-  lastTotalOrders: 9_407,
-  numOfvisitors: 72_499,
-  lastNumOfVisitors: 14_358,
-  numOfRefunded: 2_300,
-  lastNumOfRefunded: 1326,
+const dataDefault = {
+  totalSales: 0,
+  lastTotalSales: 0,
+  totalOrders: 0,
+  lastTotalOrders: 0,
+  numOfvisitors: 0,
+  lastNumOfVisitors: 0,
+  numOfRefunded: 0,
+  lastNumOfRefunded: 0,
 };
+
 const Card = ({
   value,
   title,
-  // incrementalPercentage,
+  incrementalPercentage,
 }: {
   value: string;
   title: string;
@@ -24,31 +26,39 @@ const Card = ({
     <div className="col-span-3 bg-white rounded-lg p-8 shadow">
       <h3 className="text-sm">{title}</h3>
       <p className="text-2xl font-bold py-3">{value}</p>
-      {/* <div className="flex gap-5 text-xs items-center">
-        {incrementalPercentage > 0 ? (
-          <div className="text-green-600 flex gap-2 items-center">
-            <TrendingUp />
-            <p>{incrementalPercentage.toFixed(2)}%</p>
-          </div>
-        ) : (
-          <div className="text-red-600 flex gap-2 items-center">
-            <TrendingDown />
-            <p>{incrementalPercentage.toFixed(2)}%</p>
-          </div>
-        )}
-        <div>So với tháng trước</div>
-      </div> */}
     </div>
   );
 };
 
-function calculatePercentageIncrement(original: number, newNumber: number) {
-  const increment = newNumber - original;
-  const percentageIncrement = (increment / original) * 100;
-  return percentageIncrement;
-}
+const calculatePercentageIncrement = (original: number, newNumber: number) => {
+  if (original === 0) return 0;
+  return ((newNumber - original) / original) * 100;
+};
 
 const Overview = () => {
+  const [data, setData] = useState(dataDefault);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getStatics();
+      if (response.success && response.data?.data) {
+        setData({
+          totalSales: response.data.data.totalRevenue,
+          lastTotalSales: dataDefault.lastTotalSales,
+          totalOrders: response.data.data.totalOrders,
+          lastTotalOrders: dataDefault.lastTotalOrders,
+          numOfvisitors: response.data.data.numberUser,
+          lastNumOfVisitors: dataDefault.lastNumOfVisitors,
+          numOfRefunded: response.data.data.totalAccess,
+          lastNumOfRefunded: dataDefault.lastNumOfRefunded,
+        });
+      } else {
+        console.error("Lỗi khi tải dữ liệu:", response.error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <Card
@@ -68,7 +78,7 @@ const Overview = () => {
         )}
       />
       <Card
-        title="Tổng lượt tài khoản người dùng"
+        title="Tổng số người dùng"
         value={data.numOfvisitors.toLocaleString()}
         incrementalPercentage={calculatePercentageIncrement(
           data.lastNumOfVisitors,
@@ -76,7 +86,7 @@ const Overview = () => {
         )}
       />
       <Card
-        title="Doanh thu trong ngày"
+        title="Tổng lượt truy cập"
         value={data.numOfRefunded.toLocaleString()}
         incrementalPercentage={calculatePercentageIncrement(
           data.lastNumOfRefunded,

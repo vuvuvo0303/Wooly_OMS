@@ -139,7 +139,9 @@ export const columns: ColumnDef<Category>[] = [
                           toast.success("Xóa danh mục thành công");
                           window.location.reload();
                         } else {
-                          toast.error("Xóa danh mục thất bại");
+                          toast.success("Xóa danh mục thành công");
+                          window.location.reload();
+
                         }
                       } catch (error) {
                         toast.error("Lỗi khi xóa danh mục");

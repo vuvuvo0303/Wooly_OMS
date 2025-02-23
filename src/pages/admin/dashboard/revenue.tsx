@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
-
 import {
   Card,
   CardContent,
@@ -15,43 +15,66 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { formatCurrencyVND } from "@/lib/currency";
+import { getchart } from "@/lib/api/statics-api";
+
 const chartConfig = {
   revenue: {
     label: "Doanh thu",
     color: "hsl(var(--chart-1))",
   },
   target: {
-    label: "Mục tiêu",
+    label: "Số đơn",
     color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
-const chartData = [
-  { month: "January", revenue: 1000000, target: 1000000 },
-  { month: "February", revenue: 1200000, target: 1100000 },
-  { month: "March", revenue: 900000, target: 950000 },
-  { month: "April", revenue: 1300000, target: 1250000 },
-  { month: "May", revenue: 1500000, target: 1400000 },
-  { month: "June", revenue: 1700000, target: 1600000 },
-  { month: "July", revenue: 1600000, target: 1550000 },
-  { month: "August", revenue: 1800000, target: 1750000 },
-  { month: "September", revenue: 2000000, target: 1900000 },
-  { month: "October", revenue: 2100000, target: 2000000 },
-  { month: "November", revenue: 2200000, target: 2150000 },
-  { month: "December", revenue: 2500000, target: 2400000 },
-];
+
 const Revenue = () => {
+  const [chartData, setChartData] = useState<Array<any>>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await getchart();
+      if (!error && data) {
+        const transformedData = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ].map((month, index) => {
+          const apiData = data.data.find((item: any) =>
+            item.month.includes(`-${(index + 1).toString().padStart(2, "0")}`)
+          );
+          return {
+            month,
+            revenue: apiData?.totalRevenues || 0,
+            target: apiData?.totalOrders || 0,
+          };
+        });
+        setChartData(transformedData);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Card className="col-span-8">
       <CardHeader>
         <CardTitle className="text-lg">Thống kê số đơn và doanh thu theo tháng</CardTitle>
         <CardDescription className="flex gap-5">
           <div className="flex gap-2 items-center">
-            <div className="size-3 bg-[hsl(var(--chart-1))] rounded-sm"></div>{" "}
-            Doanh thu
+            <div className="size-3 bg-[hsl(var(--chart-1))] rounded-sm"></div> Doanh thu
           </div>
           <div className="flex gap-2 items-center">
-            <div className="size-3 bg-[hsl(var(--chart-2))] rounded-sm"></div>{" "}
-          Số đơn
+            <div className="size-3 bg-[hsl(var(--chart-2))] rounded-sm"></div> Số đơn
           </div>
         </CardDescription>
       </CardHeader>
@@ -60,10 +83,7 @@ const Revenue = () => {
           <LineChart
             accessibilityLayer
             data={chartData}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
+            margin={{ left: 12, right: 12 }}
           >
             <CartesianGrid vertical={false} />
             <XAxis
@@ -88,8 +108,7 @@ const Revenue = () => {
                         }
                       />
                       <div className="flex min-w-[130px] items-center text-xs text-muted-foreground">
-                        {chartConfig[name as keyof typeof chartConfig]?.label ||
-                          name}
+                        {chartConfig[name as keyof typeof chartConfig]?.label || name}
                         <div className="ml-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums text-foreground">
                           {formatCurrencyVND(value as number)}
                         </div>
@@ -104,18 +123,14 @@ const Revenue = () => {
               type="monotone"
               stroke="var(--color-revenue)"
               strokeWidth={2}
-              dot={{
-                fill: "var(--color-revenue)",
-              }}
+              dot={{ fill: "var(--color-revenue)" }}
             />
             <Line
               dataKey="target"
               type="monotone"
               stroke="var(--color-target)"
               strokeWidth={2}
-              dot={{
-                fill: "var(--color-target)",
-              }}
+              dot={{ fill: "var(--color-target)" }}
             />
           </LineChart>
         </ChartContainer>

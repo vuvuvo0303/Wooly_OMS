@@ -1,3 +1,4 @@
+import { Product } from "@/types/product";
 import { axiosClient } from "./config/axios-client";
 
 export const handleApiError = (error: any) => {
@@ -10,9 +11,17 @@ export const handleApiError = (error: any) => {
   }
 };
 
-export const getProducts = async (id: string) => {
+export const getAllProducts = async () => {
   try {
-    const { data } = await axiosClient.get(`/`);
+    const { data } = await axiosClient.get("/product/get-all-product")
+    return { error: null, data: data, success: true };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+export const createProduct = async (productData: Product) => {
+  try {
+    const { data } = await axiosClient.post("/product/add-product", productData);
     return { error: null, data: data, success: true };
   } catch (error) {
     return handleApiError(error);
