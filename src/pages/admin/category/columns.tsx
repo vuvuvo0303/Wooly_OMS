@@ -44,7 +44,7 @@ export const columns: ColumnDef<Category>[] = [
     ),
   },
   {
-    accessorKey: "createAt",
+    accessorKey: "createdAt",
     header: ({ column }) => (
       <Button
         variant="ghost"
@@ -56,10 +56,11 @@ export const columns: ColumnDef<Category>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const dateStr = row.original.createAt; // Đúng key theo API
-      return <div>{dateStr ? new Date(dateStr).toLocaleString() : "Không có dữ liệu"}</div>;
+      console.log("Row data:", row.original); // Kiểm tra toàn bộ object
+      return <div>{row.original.createAt || "-"}</div>;
     },
   },
+  
   {
     accessorKey: "updateAt",
     header: ({ column }) => (
@@ -72,8 +73,12 @@ export const columns: ColumnDef<Category>[] = [
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
-    cell: ({ row }) => <div>{new Date(row.original.updateAt).toLocaleString()}</div>,
+    cell: ({ row }) => {
+      const dateStr = row.original.updateAt;
+      return <div>{dateStr ? new Date(dateStr).toLocaleString() : "-"}</div>;
+    },
   },
+  
   {
     id: "actions",
     cell: ({ row }) => {
