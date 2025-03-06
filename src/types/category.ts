@@ -1,6 +1,6 @@
 export type Category = {
   categoryID: number;
   name: string;
-  createdAt: string;
-  updatedAt: string;
+  createAt: string;
+  updateAt: string;
 };

@@ -13,6 +13,8 @@ import wooly_logo from "@/assets/images/wooly_logo.png";
 import loginbg from "@/assets/images/loginbg.png";
 import { login } from "@/lib/api/auth-api";
 import { toast } from "react-toastify";
+
+import RotatingText from "@/components/RotatingText";
 const formSchema = z.object({
   email: z.string().email("Email không hợp lệ"),
   password: z.string().min(3, "Mật khẩu phải chứa ít nhất 3 ký tự"),
@@ -35,7 +37,6 @@ const LoginPage = () => {
     } else {
       localStorage.setItem("accessToken", loginResult.data.accessToken);
       toast.success("Đăng nhập thành công");
-      
     }
     navigate("/");
   };
@@ -106,6 +107,23 @@ const LoginPage = () => {
               </Button>
             </form>
           </Form>
+        </div>
+      </div>
+      <div className="flex flex-col col-span-6 justify-center items-center">
+        <div className="flex  items-center gap-4">
+          <span className="font-bold text-6xl mb-3 text-white ">Made</span>
+          <RotatingText
+            texts={["Cozy ", "Soft ", "Warm ", "Unique !"]}
+            mainClassName="px-5 sm:px-5 md:px-5 text-5xl bg-gradient-to-r from-blue-300 to-green-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+            staggerFrom={"last"}
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-120%" }}
+            staggerDuration={0.025}
+            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            rotationInterval={2000}
+          />
         </div>
       </div>
     </div>

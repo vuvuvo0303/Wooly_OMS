@@ -22,6 +22,7 @@ const OrdersPage = () => {
             customerPhone: item.customerPhone,
             customerAddress: item.customerAddress,
             totalPrice: item.totalPrice,
+            user:item.user,
             orderDate: item.orderDate,
             cancelled: item.cancelled,
           }))

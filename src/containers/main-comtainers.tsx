@@ -1,6 +1,5 @@
 import NotFound from "@/components/page-not-found";
 import MainLayout from "@/layouts/main-layout";
-import BrandListingPage from "@/pages/admin/brand/brand-listing-page";
 import CategoriesPage from "@/pages/admin/category/categories-page";
 import DashboardPage from "@/pages/admin/dashboard/dashboard-page";
 import OrderDetailPage from "@/pages/admin/order/order-detail-page";
@@ -9,37 +8,50 @@ import CreateProductPage from "@/pages/admin/product/create-product-page";
 import ProductDetailPage from "@/pages/admin/product/product-detail-page";
 import ProductsPage from "@/pages/admin/product/product-listing/products-page";
 import UpdateProductPage from "@/pages/admin/product/update-product-page";
-import CreateUserPage from "@/pages/admin/user/create-user-page";
-import UpdateUserPage from "@/pages/admin/user/update-user-page";
-import UserDetail from "@/pages/admin/user/user-detail-page";
-import UsersPage from "@/pages/admin/user/user-listing/users-page";
-import { Route, Routes } from "react-router-dom";
+import TranasctionPending from "@/pages/admin/transactions/tranasction-pending";
+import TransactionComplete from "@/pages/admin/transactions/transaction-complete";
 
-const MainContainter = () => {
+import UsersPage from "@/pages/admin/user/user-listing/users-page";
+import LoginPage from "@/pages/auth/login-page";
+import { Route, Routes, Navigate } from "react-router-dom";
+
+const isAuthenticated = () => !!localStorage.getItem("accessToken");
+
+const MainContainer = () => {
   return (
     <MainLayout>
       <Routes>
-        <Route path="/" element={<DashboardPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/user" element={<UsersPage />} />
-        <Route path="/user/:userId" element={<UserDetail />} />
-        <Route path="/create-user" element={<CreateUserPage />} />
-        <Route path="/edit-user/:userId" element={<UpdateUserPage />} />
-        <Route path="/product" element={<ProductsPage />} />
-        <Route path="/product/:productId" element={<ProductDetailPage />} />
-        <Route path="/create-product" element={<CreateProductPage />} />
+        <Route path="/" element={isAuthenticated() ? <DashboardPage /> : <Navigate to="/login" />} />
+        <Route path="/dashboard" element={isAuthenticated() ? <DashboardPage /> : <Navigate to="/login" />} />
+        <Route
+          path="/transaction-pending"
+          element={isAuthenticated() ? <TranasctionPending /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/transaction-complete"
+          element={isAuthenticated() ? <TransactionComplete /> : <Navigate to="/login" />}
+        />
+        <Route path="/user" element={isAuthenticated() ? <UsersPage /> : <Navigate to="/login" />} />
+
+        <Route path="/product" element={isAuthenticated() ? <ProductsPage /> : <Navigate to="/login" />} />
+        <Route
+          path="/product/:productId"
+          element={isAuthenticated() ? <ProductDetailPage /> : <Navigate to="/login" />}
+        />
+        <Route path="/create-product" element={isAuthenticated() ? <CreateProductPage /> : <Navigate to="/login" />} />
         <Route
           path="/edit-product/:productId"
-          element={<UpdateProductPage />}
+          element={isAuthenticated() ? <UpdateProductPage /> : <Navigate to="/login" />}
         />
-        <Route path="/order" element={<OrdersPage />} />
-        <Route path="/order/:orderId" element={<OrderDetailPage />} />
-        <Route path="/category" element={<CategoriesPage />} />
-        <Route path="/brand" element={<BrandListingPage />} />
-        <Route path="/*" element={<NotFound />} />
+        <Route path="/order" element={isAuthenticated() ? <OrdersPage /> : <Navigate to="/login" />} />
+        <Route path="/order/:orderId" element={isAuthenticated() ? <OrderDetailPage /> : <Navigate to="/login" />} />
+        <Route path="/category" element={isAuthenticated() ? <CategoriesPage /> : <Navigate to="/login" />} />
+
+        <Route path="/login" element={isAuthenticated() ? <Navigate to="/dashboard" /> : <LoginPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </MainLayout>
   );
 };
 
-export default MainContainter;
+export default MainContainer;

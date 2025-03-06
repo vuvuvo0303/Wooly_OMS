@@ -28,13 +28,22 @@ export const columns: ColumnDef<Order>[] = [
     header: "Số điện thoại khách hàng",
   },
   {
+    accessorKey: "user",
+    header: "Tên khách hàng",
+  },
+  {
     accessorKey: "customerAddress",
     header: "Địa chỉ khách hàng",
   },
   {
     accessorKey: "totalPrice",
     header: "Tổng giá",
-    cell: ({ row }) => <div>{row.original.totalPrice.toLocaleString()} VND</div>,
+    cell: ({ row }) => {
+      if (row.original.totalPrice == null) {
+        return "";
+      }
+      return <div>{row.original.totalPrice.toLocaleString()} VND</div>;
+    },
   },
   {
     accessorKey: "orderDate",

@@ -44,7 +44,7 @@ export const columns: ColumnDef<Category>[] = [
     ),
   },
   {
-    accessorKey: "createdAt",
+    accessorKey: "createAt",
     header: ({ column }) => (
       <Button
         variant="ghost"
@@ -55,10 +55,13 @@ export const columns: ColumnDef<Category>[] = [
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
-    cell: ({ row }) => <div>{formatDate(new Date(row.original.createdAt))}</div>,
+    cell: ({ row }) => {
+      const dateStr = row.original.createAt; // Đúng key theo API
+      return <div>{dateStr ? new Date(dateStr).toLocaleString() : "Không có dữ liệu"}</div>;
+    },
   },
   {
-    accessorKey: "updatedAt",
+    accessorKey: "updateAt",
     header: ({ column }) => (
       <Button
         variant="ghost"
@@ -69,7 +72,7 @@ export const columns: ColumnDef<Category>[] = [
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
-    cell: ({ row }) => <div>{formatDate(new Date(row.original.updatedAt))}</div>,
+    cell: ({ row }) => <div>{new Date(row.original.updateAt).toLocaleString()}</div>,
   },
   {
     id: "actions",
@@ -141,7 +144,6 @@ export const columns: ColumnDef<Category>[] = [
                         } else {
                           toast.success("Xóa danh mục thành công");
                           window.location.reload();
-
                         }
                       } catch (error) {
                         toast.error("Lỗi khi xóa danh mục");

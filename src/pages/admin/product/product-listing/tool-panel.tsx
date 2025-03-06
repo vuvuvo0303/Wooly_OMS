@@ -15,6 +15,7 @@ const ToolPanel = () => {
   const [categories, setCategories] = useState<any[]>([]);
   const [loadingCategories, setLoadingCategories] = useState(true);
 
+  // Use this sample image or upload your own via the Media Explorer
   // 🟢 Fetch danh mục khi component mount
   useEffect(() => {
     const fetchCategories = async () => {
@@ -118,6 +119,7 @@ const ToolPanel = () => {
         okText="Lưu"
         cancelText="Hủy"
       >
+        {/* <Dropzone /> */}
         <Form form={form} layout="vertical">
           <Form.Item label="Tên sản phẩm" name="productName" rules={[{ required: true }]}>
             <AntInput />
@@ -174,7 +176,7 @@ const ToolPanel = () => {
                       {...restField}
                       label="Tên bộ phận"
                       name={[name, "partName"]}
-                      rules={[{ required: true, message: "Nhập tên bộ phận!" }]}
+                      rules={[{ required: false, message: "Nhập tên bộ phận!" }]}
                     >
                       <AntInput placeholder="Nhập tên bộ phận" />
                     </Form.Item>
@@ -188,24 +190,22 @@ const ToolPanel = () => {
                               {...restColorField}
                               label="Màu sắc"
                               name={[colorName, "partColor"]}
-                              rules={[{ required: true, message: "Nhập màu sắc!" }]}
+                              rules={[{ required: false, message: "Nhập màu sắc!" }]}
                             >
                               <AntInput placeholder="Nhập màu sắc" />
                             </Form.Item>
                           ))}
-                          <Button className="mb-7" onClick={() => addColor()}>Thêm màu sắc</Button>
+                          <Button className="mb-7" onClick={() => addColor()}>
+                            Thêm màu sắc
+                          </Button>
                         </div>
                       )}
                     </Form.List>
 
-                    <Button    onClick={() => remove(name)}>
-                      Xóa bộ phận
-                    </Button>
+                    <Button onClick={() => remove(name)}>Xóa bộ phận</Button>
                   </div>
                 ))}
-                <Button onClick={() => add()}>
-                  Thêm bộ phận
-                </Button>
+                <Button onClick={() => add()}>Thêm bộ phận</Button>
               </>
             )}
           </Form.List>

@@ -12,21 +12,21 @@ function App() {
     const accessToken = localStorage.getItem("accessToken");
     const fetchData = async () => {
       const userResult = await checkToken();
+      console.log("User Result: ", userResult); // Kiểm tra kết quả trả về
+
       if (userResult.error) {
-        toast.error(userResult.error, {
-          toastId: "tokenError",
-        });
+        toast.error(userResult.error, { toastId: "tokenError" });
         localStorage.removeItem("accessToken");
       } else {
-        setUser(userResult.data ? userResult.data : null);
+        setUser(userResult.data || null);
       }
     };
+
     if (accessToken) {
       fetchData();
-    } else {
-      <h1>oh nooo</h1>;
     }
   }, [setUser]);
+
   return (
     <>
       <Routes>

@@ -15,9 +15,9 @@ const CategoriesPage = () => {
     try {
       setLoading(true);
       const response = await getCategories();
-      if (response.success) {
+      if ((response as { success: boolean }).success) {
         setData(
-          response.data.map((item) => ({
+          response.data.map((item:any) => ({
             id: item.id,
             name: item.name,
             createdAt: item.createdAt,

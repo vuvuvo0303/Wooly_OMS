@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ChartPie, CircleUserRound, RectangleEllipsis, Store } from "lucide-react";
+import { ArrowLeftRight, ChartPie, CircleUserRound, RectangleEllipsis, Store } from "lucide-react";
 
 import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
@@ -70,6 +70,22 @@ const data = {
       ],
     },
     {
+      title: "Giao dịch",
+      url: "/user",
+      icon: ArrowLeftRight,
+      isActive: true,
+      items: [
+        {
+          title: "Giao dịch hoành thành",
+          url: "/transaction-complete",
+        },
+        {
+          title: "Giao dịch  chưa hoành thành",
+          url: "/transaction-pending",
+        },
+      ],
+    },
+    {
       title: "Người dùng",
       url: "/user",
       icon: CircleUserRound,
@@ -79,14 +95,14 @@ const data = {
           title: "Tài khoản",
           url: "/user",
         },
-        {
-          title: "Nhân viên",
-          url: "/user/staff",
-        },
-        {
-          title: "Khách hàng",
-          url: "/user/customer",
-        },
+        // {
+        //   title: "Nhân viên",
+        //   url: "/user/staff",
+        // },
+        // {
+        //   title: "Khách hàng",
+        //   url: "/user/customer",
+        // },
       ],
     },
     {
