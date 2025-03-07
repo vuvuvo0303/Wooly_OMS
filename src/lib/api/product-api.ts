@@ -13,7 +13,7 @@ export const handleApiError = (error: any) => {
 
 export const getAllProducts = async () => {
   try {
-    const { data } = await axiosClient.get("/product/get-all-product")
+    const { data } = await axiosClient.get("/admin/get-all-product")
     return { error: null, data: data, success: true };
   } catch (error) {
     return handleApiError(error);
