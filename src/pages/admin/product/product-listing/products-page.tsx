@@ -17,10 +17,11 @@ const ProductsPage = () => {
       setLoading(true);
       try {
         const response = await getAllProducts();
-        if (response.success) {
-          setProducts(response.data);
+        console.log("API Response: ", response);
+        if (response.success && Array.isArray(response.data.data)) {
+          setProducts(response.data.data); // ✅ Lấy đúng mảng sản phẩm
         } else {
-          setError(response.error || "Failed to fetch products.");
+          setError("Failed to fetch products.");
         }
       } catch (err) {
         setError("An unexpected error occurred.");
@@ -28,9 +29,10 @@ const ProductsPage = () => {
         setLoading(false);
       }
     };
-
     fetchProducts();
   }, []);
+  
+  
 
   return (
     <div className="flex flex-col h-screen">
