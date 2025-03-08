@@ -205,7 +205,11 @@ const ToolPanel = () => {
         cancelText="Hủy"
       >
         <Form form={form} layout="vertical">
-          <Form.Item label="Tên sản phẩm" name="productName" rules={[{ required: true, message: "Vui lòng nhập tên sản phẩm!" }]}>
+          <Form.Item
+            label="Tên sản phẩm"
+            name="productName"
+            rules={[{ required: true, message: "Vui lòng nhập tên sản phẩm!" }]}
+          >
             <AntInput />
           </Form.Item>
 
@@ -214,14 +218,27 @@ const ToolPanel = () => {
           </Form.Item>
 
           <Form.Item label="Giá bán (VNĐ)" name="price" rules={[{ required: true, message: "Vui lòng nhập giá bán!" }]}>
+            <InputNumber
+              className="w-full"
+              min={0}
+              formatter={(value) => (value ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " ₫" : "")}
+              parser={(value) => value.replace(/\D/g, "")}
+            />
+          </Form.Item>
+
+          <Form.Item
+            label="Số lượng tồn kho"
+            name="stockQuantity"
+            rules={[{ required: true, message: "Vui lòng nhập số lượng!" }]}
+          >
             <InputNumber className="w-full" min={0} />
           </Form.Item>
 
-          <Form.Item label="Số lượng tồn kho" name="stockQuantity" rules={[{ required: true, message: "Vui lòng nhập số lượng!" }]}>
-            <InputNumber className="w-full" min={0} />
-          </Form.Item>
-
-          <Form.Item label="Danh mục" name="categoryID" rules={[{ required: true, message: "Vui lòng chọn danh mục!" }]}>
+          <Form.Item
+            label="Danh mục"
+            name="categoryID"
+            rules={[{ required: true, message: "Vui lòng chọn danh mục!" }]}
+          >
             {loadingCategories ? (
               <Spin />
             ) : (
@@ -277,20 +294,23 @@ const ToolPanel = () => {
                           <AntInput placeholder="Tên bộ phận" />
                         </Form.Item>
                         <Button
-                        className="bg-red-600 hover:bg-red-600"
+                          className="bg-red-600 hover:bg-red-600"
                           type="dashed"
                           onClick={() => remove(name)}
                           style={{ marginBottom: 24 }}
                         >
                           xóa
-                          </Button>
+                        </Button>
                       </div>
 
                       <Form.List name={[name, "partColors"]}>
                         {(colorFields, { add: addColor, remove: removeColor }) => (
                           <>
                             {colorFields.map(({ key: colorKey, name: colorName, ...restColorField }) => (
-                              <div key={colorKey} style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: 24 }}>
+                              <div
+                                key={colorKey}
+                                style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: 24 }}
+                              >
                                 <Form.Item
                                   {...restColorField}
                                   name={[colorName, "partColor"]}
@@ -299,12 +319,7 @@ const ToolPanel = () => {
                                 >
                                   <AntInput placeholder="Màu sắc" />
                                 </Form.Item>
-                                <Button
-                                  type="dashed"
-                                  onClick={() => removeColor(colorName)}
-                                  icon={<Plus />}
-                                  
-                                >
+                                <Button type="dashed" onClick={() => removeColor(colorName)} icon={<Plus />}>
                                   xóa
                                 </Button>
                               </div>
