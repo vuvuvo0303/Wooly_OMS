@@ -44,22 +44,23 @@ export const columns: ColumnDef<Category>[] = [
     ),
   },
   {
-    accessorKey: "createdAt",
+    accessorKey: "createAt",
     header: ({ column }) => (
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         className="p-0 m-0 w-full justify-start"
       >
-        Ngày tạo
+        Ngày chỉnh sửa
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
     cell: ({ row }) => {
-      console.log("Row data:", row.original); // Kiểm tra toàn bộ object
-      return <div>{row.original.createAt || "-"}</div>;
+      const dateStr = row.original.createAt;
+      return <div>{dateStr ? new Date(dateStr).toLocaleString() : "-"}</div>;
     },
   },
+  
   
   {
     accessorKey: "updateAt",

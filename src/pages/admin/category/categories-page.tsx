@@ -20,8 +20,8 @@ const CategoriesPage = () => {
           response.data.map((item:any) => ({
             id: item.id,
             name: item.name,
-            createdAt: item.createdAt,
-            updatedAt: item.updatedAt,
+            createAt: item.createAt,
+            updateAt: item.updateAt,
           }))
         );
       } else {
