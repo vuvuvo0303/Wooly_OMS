@@ -41,7 +41,7 @@ const DeleteConfirm = ({ product, onSuccess }: DeleteConfirmProps) => {
           // Kiểm tra nếu result.success là true
           if (result && result.success === true) {
             toast.success("Đã xóa sản phẩm thành công");
-            window.location.reload(); 
+            window.location.reload();
             if (onSuccess) onSuccess();
           } else {
             toast.error(result?.message || "Xóa sản phẩm thất bại");
@@ -57,12 +57,7 @@ const DeleteConfirm = ({ product, onSuccess }: DeleteConfirmProps) => {
   };
 
   return (
-    <Button
-      variant="destructive"
-      className="w-full text-left justify-start"
-      onClick={handleDelete}
-      disabled={loading}
-    >
+    <Button variant="destructive" className="w-full text-left justify-start" onClick={handleDelete} disabled={loading}>
       {loading ? "Đang xóa..." : "Xóa sản phẩm"}
     </Button>
   );
@@ -132,14 +127,32 @@ export const columns: ColumnDef<Product>[] = [
     header: "Màu sắc",
     cell: ({ row }) => {
       const parts = row.original.partNames || [];
-      const colors = parts.flatMap((part) => part.partColors.map((color) => color.partColor));
+
       return (
-        <div className="flex gap-1 flex-wrap">
-          {colors.length > 0 ? (
-            colors.map((color, index) => (
-              <span key={index} className="px-1 py-0.5 rounded bg-gray-200 text-[10px]">
-                {color}
-              </span>
+        <div className="flex flex-col gap-1">
+          {parts.length > 0 ? (
+            parts.map((part, partIndex) => (
+              <div key={partIndex}>
+                <span className="font-semibold">{part.partName}:</span>{" "}
+                {part.partColors.length > 0 ? (
+                  part.partColors.map((color, colorIndex) => {
+                    const bgColor = color.partColor.toLowerCase(); // Chuyển thành lowercase để tránh sai màu
+                    const textColor = ["black", "blue", "red", "purple", "brown"].includes(bgColor) ? "#FFF" : "#000"; // Chữ trắng nếu nền tối, chữ đen nếu nền sáng
+
+                    return (
+                      <span
+                        key={colorIndex}
+                        className="px-1 py-0.5 rounded text-[10px] ml-1"
+                        style={{ backgroundColor: bgColor, color: textColor }}
+                      >
+                        {color.partColor}
+                      </span>
+                    );
+                  })
+                ) : (
+                  <span className="ml-1">Không có</span>
+                )}
+              </div>
             ))
           ) : (
             <span>Không có</span>
@@ -147,8 +160,9 @@ export const columns: ColumnDef<Product>[] = [
         </div>
       );
     },
-    size: 50,
+    size: 100,
   },
+
   {
     id: "actions",
     cell: ({ row }) => {
