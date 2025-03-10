@@ -1,3 +1,14 @@
+export type PartColor = {
+  colorID: number;
+  partColor: string;
+};
+
+export type Part = {
+  partID: number;
+  partName: string;
+  partColors: PartColor[];
+};
+
 export type Product = {
   productID: number;
   description: string;
@@ -6,4 +17,5 @@ export type Product = {
   price: number;
   stockQuantity: number;
   category: string;
+  partNames: Part[]; 
 };

@@ -27,3 +27,12 @@ export const createProduct = async (productData: Product) => {
     return handleApiError(error);
   }
 };
+export const deleteProduct = async (productID: number) => {
+  try {
+    const response = await axiosClient.delete(`/product/delete-product/${productID}`);
+    return { success: true, data: response.data }; // Đảm bảo trả về success: true
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    return { success: false, message: "Failed to delete product" };
+  }
+};
