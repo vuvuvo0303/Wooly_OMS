@@ -17,3 +17,12 @@ export const getLatestOrders = async () => {
     return handleApiError(error);
   }
 };
+
+export const getAllOrders = async () => {
+  try {
+    const response = await axiosClient.get("/admin/get-all-orders");
+    return { data: response.data, error: null };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};

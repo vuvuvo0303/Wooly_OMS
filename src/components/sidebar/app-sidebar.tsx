@@ -48,6 +48,10 @@ const data = {
           url: "/order",
         },
         {
+          title: "Đơn hàng",
+          url: "/orderHistory",
+        },
+        {
           title: "Loại sản phẩm len",
           url: "/category",
         },

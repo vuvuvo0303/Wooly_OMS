@@ -3,6 +3,7 @@ import MainLayout from "@/layouts/main-layout";
 import CategoriesPage from "@/pages/admin/category/categories-page";
 import DashboardPage from "@/pages/admin/dashboard/dashboard-page";
 import OrderDetailPage from "@/pages/admin/order/order-detail-page";
+import OrderHistoryPage from "@/pages/admin/order-history/order-history-page";
 import OrdersPage from "@/pages/admin/order/orders-page";
 import CreateProductPage from "@/pages/admin/product/create-product-page";
 import ProductDetailPage from "@/pages/admin/product/product-detail-page";
@@ -46,6 +47,7 @@ const MainContainer = () => {
         <Route path="/order" element={isAuthenticated() ? <OrdersPage /> : <Navigate to="/login" />} />
         <Route path="/order/:orderId" element={isAuthenticated() ? <OrderDetailPage /> : <Navigate to="/login" />} />
         <Route path="/category" element={isAuthenticated() ? <CategoriesPage /> : <Navigate to="/login" />} />
+        <Route path="/orderHistory" element={isAuthenticated() ? <OrderHistoryPage /> : <Navigate to="/login" />} />
 
         <Route path="/login" element={isAuthenticated() ? <Navigate to="/dashboard" /> : <LoginPage />} />
         <Route path="*" element={<NotFound />} />
