@@ -15,6 +15,7 @@ import {
     ChartTooltipContent,
 } from "@/components/ui/chart";
 import { formatCurrencyVND } from "@/lib/currency";
+import { getRevenuePerDay } from "@/lib/api/statics-api";
 
 const chartConfig = {
     revenue: {
@@ -26,31 +27,25 @@ const chartConfig = {
 const DailyRevenue = () => {
     const [chartData, setChartData] = useState<Array<any>>([]);
 
-    const dailyRevenueData = [
-        { date: "2025-03-04", totalRevenue: 150000 },
-        { date: "2025-03-05", totalRevenue: 180000 },
-        { date: "2025-03-06", totalRevenue: 220000 },
-        { date: "2025-03-07", totalRevenue: 190000 },
-        { date: "2025-03-08", totalRevenue: 210000 },
-        { date: "2025-03-09", totalRevenue: 240000 },
-        { date: "2025-03-10", totalRevenue: 260000 },
-        { date: "2025-03-11", totalRevenue: 280000 },
-    ];
-
     useEffect(() => {
-        const formattedData = dailyRevenueData.map((item) => ({
-            ...item,
-            date: formatDate(item.date),
-        }));
-        setChartData(formattedData);
+        const fetchData = async () => {
+            const response = await getRevenuePerDay();
+            if (response.success && response.data) {
+                const formattedData = response.data.map((item: any) => ({
+                    ...item,
+                    date: formatDate(item.date),
+                }));
+                setChartData(formattedData);
+            } else {
+                console.error("Lỗi khi tải dữ liệu doanh thu:", response.error);
+            }
+        };
+        fetchData();
     }, []);
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
-        const day = String(date.getDate()).padStart(2, "0");
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const year = String(date.getFullYear()).slice(-2);
-        return `${day}/${month}/${year}`;
+        return date.toLocaleDateString("vi-VN");
     };
 
     const formatToThousandVND = (value: number) => {
@@ -98,16 +93,14 @@ const DailyRevenue = () => {
                                         <>
                                             <div
                                                 className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
-                                                style={
-                                                    {
-                                                        "--color-bg": `var(--color-${name})`,
-                                                    } as React.CSSProperties
-                                                }
+                                                style={{
+                                                    "--color-bg": `var(--color-${name})`,
+                                                } as React.CSSProperties}
                                             />
                                             <div className="flex min-w-[130px] items-center text-xs text-muted-foreground">
                                                 {chartConfig[name as keyof typeof chartConfig]?.label || name}
                                                 <div className="ml-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums text-foreground">
-                                                    {formatToThousandVND(value as number)} {/* Hiển thị giá trị dưới dạng nghìn đồng */}
+                                                    {formatToThousandVND(value as number)}
                                                 </div>
                                             </div>
                                         </>
