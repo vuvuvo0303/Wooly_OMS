@@ -15,6 +15,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button";
 import { getAllUsers } from "@/lib/api/user-api";
 import { cn } from "@/lib/utils";
+import Loader from "@/components/loader";
 
 const UsersListingPage = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -93,7 +94,10 @@ const UsersListingPage = () => {
       <div className="p-5 flex-1 overflow-auto">
         <ToolsPanel />
         {loading ? (
-          <p className="text-center text-lg">Loading...</p>
+          <div>
+            {" "}
+            <Loader />
+          </div>
         ) : (
           <div className="rounded-md border">
             <Table>

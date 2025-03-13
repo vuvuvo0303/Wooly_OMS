@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "@/components/ui/badge";
 import { getBestSeller } from "@/lib/api/statics-api";
 import { Product } from "@/types/product";
+import Loader from "@/components/loader";
 
 const BestSelling = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -21,7 +16,7 @@ const BestSelling = () => {
       try {
         const response = await getBestSeller();
         console.log("Response từ API: ", response);
-  
+
         if (response.success && Array.isArray(response.data?.data)) {
           setProducts(response.data.data.slice(0, 6));
         } else {
@@ -35,9 +30,14 @@ const BestSelling = () => {
     };
     fetchBestSellers();
   }, []);
-  
 
-  if (loading) return <p>Đang tải...</p>;
+  if (loading)
+    return (
+      <div>
+        {" "}
+        <Loader />
+      </div>
+    );
 
   return (
     <div className="col-span-4">

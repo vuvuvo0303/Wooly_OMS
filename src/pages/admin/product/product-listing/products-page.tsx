@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ToolPanel from "./tool-panel";
 import { getAllProducts } from "@/lib/api/product-api"; // Import API
 import { Product } from "@/types/product"; // Đảm bảo import type Product
+import Loader from "@/components/loader";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -40,7 +41,7 @@ const ProductsPage = () => {
       <div className="p-5 flex-1 overflow-auto">
         <ToolPanel />
         {loading ? (
-          <div className="text-center py-4">Loading...</div>
+          <div className="text-center py-4"><Loader/></div>
         ) : error ? (
           <div className="text-red-500 text-center py-4">{error}</div>
         ) : (

@@ -5,6 +5,7 @@ import { Transaction } from "@/types/transaction";
 import { getTransactionComplete } from "@/lib/api/transaction-api";
 import { Badge } from "@/components/ui/badge";
 import { Loader2 } from "lucide-react"; // Giả sử dùng lucide-react cho spinner
+import Loader from "@/components/loader";
 
 const TransactionComplete = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -36,8 +37,7 @@ const TransactionComplete = () => {
       <div className="min-h-screen bg-gray-50">
         <Header title="Giao dịch" href="/" currentPage="Giao dịch hoàn thành" />
         <div className="flex justify-center items-center p-4">
-          <Loader2 className="w-6 h-6 animate-spin text-gray-500" />
-          <span className="ml-2 text-gray-600">Đang tải...</span>
+          <Loader />
         </div>
       </div>
     );
@@ -57,9 +57,7 @@ const TransactionComplete = () => {
       <Header title="Giao dịch" href="/" currentPage="Giao dịch hoàn thành" />
       <div className="p-6 max-w-7xl mx-auto">
         {transactions.length === 0 ? (
-          <div className="text-center text-gray-500 py-10">
-            Không có giao dịch nào đã hoàn thành.
-          </div>
+          <div className="text-center text-gray-500 py-10">Không có giao dịch nào đã hoàn thành.</div>
         ) : (
           <Table className="border rounded-lg shadow-sm bg-white">
             <TableHeader>
@@ -74,10 +72,7 @@ const TransactionComplete = () => {
             </TableHeader>
             <TableBody>
               {transactions.map((transaction) => (
-                <TableRow
-                  key={transaction.transactionId}
-                  className="hover:bg-gray-50 transition-colors"
-                >
+                <TableRow key={transaction.transactionId} className="hover:bg-gray-50 transition-colors">
                   <TableCell className="text-gray-900">{transaction.transactionId}</TableCell>
                   <TableCell className="text-gray-900">{transaction.userName}</TableCell>
                   <TableCell className="text-gray-900">{transaction.paymentMethod}</TableCell>
@@ -86,12 +81,8 @@ const TransactionComplete = () => {
                       {transaction.status === "completed" ? "Hoàn thành" : transaction.status}
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-gray-600">
-                  {transaction.createdAt}
-                  </TableCell>
-                  <TableCell className="text-gray-600">
-                  {transaction.updatedAt}
-                  </TableCell>
+                  <TableCell className="text-gray-600">{transaction.createdAt}</TableCell>
+                  <TableCell className="text-gray-600">{transaction.updatedAt}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

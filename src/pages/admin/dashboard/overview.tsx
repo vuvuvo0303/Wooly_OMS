@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getStatics, getRevenuePerWeek } from "@/lib/api/statics-api";
 import { formatCurrencyVND } from "@/lib/currency";
+import Loader from "@/components/loader";
 
 const dataDefault = {
   totalSales: 0,
@@ -35,7 +36,6 @@ const Overview = () => {
   const [showWeeklyRevenue, setShowWeeklyRevenue] = useState(false);
   const [weeklyRevenue, setWeeklyRevenue] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,15 +84,19 @@ const Overview = () => {
     setShowWeeklyRevenue(!showWeeklyRevenue);
   };
 
-  if (loading) return <p>Đang tải...</p>;
+  if (loading)
+    return (
+      <div>
+        {" "}
+        <Loader />
+      </div>
+    );
 
   return (
     <>
       <Card
         title={showWeeklyRevenue ? "Doanh thu tuần" : "Tổng doanh thu toàn hệ thống"}
-        value={
-          showWeeklyRevenue ? formatCurrencyVND(weeklyRevenue) : formatCurrencyVND(data.totalSales)
-        }
+        value={showWeeklyRevenue ? formatCurrencyVND(weeklyRevenue) : formatCurrencyVND(data.totalSales)}
         incrementalPercentage={calculatePercentageIncrement(data.lastTotalSales, data.totalSales)}
         onClick={toggleRevenueView}
         toggleLabel={showWeeklyRevenue ? "Xem doanh thu toàn hệ thống" : "Xem doanh thu tuần"}

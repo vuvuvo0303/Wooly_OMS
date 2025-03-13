@@ -5,6 +5,7 @@ import { Transaction } from "@/types/transaction";
 import { getTransactionPending } from "@/lib/api/transaction-api";
 import { Badge } from "@/components/ui/badge";
 import { Loader2 } from "lucide-react"; // Giả sử bạn dùng lucide-react cho icon
+import Loader from "@/components/loader";
 
 const TranasctionPending = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -50,8 +51,7 @@ const TranasctionPending = () => {
       <div className="min-h-screen bg-gray-50">
         <Header title="Giao dịch" href="/" currentPage="Giao dịch chưa hoàn thành" />
         <div className="flex justify-center items-center p-4">
-          <Loader2 className="w-6 h-6 animate-spin text-gray-500" />
-          <span className="ml-2 text-gray-600">Đang tải...</span>
+        <Loader/>
         </div>
       </div>
     );

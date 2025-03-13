@@ -5,6 +5,7 @@ import { columns } from "./columns";
 import { Category } from "@/types/category";
 import { useState, useEffect } from "react";
 import { getCategories } from "@/lib/api/category-api";
+import Loader from "@/components/loader";
 
 const CategoriesPage = () => {
   const [data, setData] = useState<Category[]>([]);
@@ -44,7 +45,7 @@ const CategoriesPage = () => {
       <div className="p-5 flex-1 overflow-auto">
         {/* Truyền fetchCategories xuống ToolsPanel */}
         <ToolsPanel fetchCategories={fetchCategories} />
-        {loading ? <p className="text-center">Đang tải dữ liệu...</p> : <DataTable columns={columns} data={data} />}
+        {loading ? <div className="text-center"><Loader/></div> : <DataTable columns={columns} data={data} />}
       </div>
     </div>
   );
