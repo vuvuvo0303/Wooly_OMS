@@ -2,6 +2,8 @@ import Header from "@/components/header";
 import Overview from "./overview";
 import Revenue from "./revenue";
 import BestSelling from "./best-selling";
+import DailyRevenue from "./daily-revenue";
+import CategorySalesPieChart from "./category-sales-pie-chart";
 
 const DashboardPage = () => {
   return (
@@ -11,6 +13,8 @@ const DashboardPage = () => {
         <Overview />
         <Revenue />
         <BestSelling />
+        <DailyRevenue />
+        <CategorySalesPieChart />
       </div>
     </div>
   );

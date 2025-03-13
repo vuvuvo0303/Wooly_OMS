@@ -42,3 +42,37 @@ export const getBestSeller = async () => {
     return handleApiError(error);
   }
 };
+
+    try {
+      const { data } = await axiosClient.get(`/admin/dashboard`);
+      return { error: null, data: data, success: true };
+    } catch (error) {
+      return handleApiError(error);
+    }
+    
+  
+
+
+
+  export const getRevenuePerWeek = async () => {
+    try {
+      const { data } = await axiosClient.get(`/admin/revenue-per-week`);
+      console.log("getRevenuePerWeek", data);
+      return { error: null, data: data, success: true };
+    } catch (error) {
+      return handleApiError(error);
+    }
+  };
+
+  export const getRevenuePerDay = async () => {
+    try {
+      const { data } = await axiosClient.get(`/admin/revenue-per-day`);
+      console.log("getRevenuePerDay", data);
+      return { error: null, data: data, success: true };
+    } catch (error) {
+      return handleApiError(error);
+    }
+  };
+
+  
+ 
