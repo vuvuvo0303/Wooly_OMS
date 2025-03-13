@@ -36,3 +36,35 @@ export const deleteProduct = async (productID: number) => {
     return { success: false, message: "Failed to delete product" };
   }
 };
+export const getProductById = async (productID: number) => {
+  try {
+    const { data } = await axiosClient.get(`/product/get-product-by/${productID}`);
+    return { error: null, data: data, success: true };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+export const updateProduct = async (productID: number, productData: Product) => {
+  try {
+    const { data } = await axiosClient.put(`/product/update-product/${productID}`, productData);
+    return { error: null, data: data, success: true };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+export const uploadProductImage = async (file: File): Promise<string> => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch("/api/upload-image", {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Upload ảnh thất bại");
+  }
+
+  const data = await response.json();
+  return data.imageUrl;
+};

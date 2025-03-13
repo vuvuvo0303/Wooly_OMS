@@ -57,7 +57,7 @@ const DeleteConfirm = ({ product, onSuccess }: DeleteConfirmProps) => {
   };
 
   return (
-    <Button variant="destructive" className="w-full text-left justify-start" onClick={handleDelete} disabled={loading}>
+    <Button className="text-left justify-start bg-red-500 hover:bg-red-500" onClick={handleDelete} disabled={loading}>
       {loading ? "Đang xóa..." : "Xóa sản phẩm"}
     </Button>
   );
@@ -177,8 +177,12 @@ export const columns: ColumnDef<Product>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Thao tác</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link to={`/product/${product.productID}/edit`}>Cập nhật</Link>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="p-0">
+              <Link to={`/product/${product.productID}/edit`} className="w-full">
+                <Button className="w-full text-center  px-4 py-2 bg-blue-500 hover:bg-blue-500">
+                  Cập nhật
+                </Button>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="p-0">

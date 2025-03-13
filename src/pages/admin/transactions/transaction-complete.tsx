@@ -87,10 +87,10 @@ const TransactionComplete = () => {
                     </Badge>
                   </TableCell>
                   <TableCell className="text-gray-600">
-                    {new Date(transaction.createdAt).toLocaleString("vi-VN")}
+                  {transaction.createdAt}
                   </TableCell>
                   <TableCell className="text-gray-600">
-                    {new Date(transaction.updatedAt).toLocaleString("vi-VN")}
+                  {transaction.updatedAt}
                   </TableCell>
                 </TableRow>
               ))}

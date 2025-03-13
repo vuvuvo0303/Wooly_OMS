@@ -48,7 +48,10 @@ export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "orderDate",
     header: "Ngày đặt",
-    cell: ({ row }) => <div>{new Date(row.original.orderDate).toLocaleString()}</div>,
+    cell: ({ row }) => {
+      const date = new Date(row.original.orderDate);
+      return <div>{`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}</div>;
+    },
   },
   {
     accessorKey: "cancelled",

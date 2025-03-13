@@ -40,7 +40,7 @@ const MainContainer = () => {
         />
         <Route path="/create-product" element={isAuthenticated() ? <CreateProductPage /> : <Navigate to="/login" />} />
         <Route
-          path="/edit-product/:productId"
+          path="/product/:productId/edit"
           element={isAuthenticated() ? <UpdateProductPage /> : <Navigate to="/login" />}
         />
         <Route path="/order" element={isAuthenticated() ? <OrdersPage /> : <Navigate to="/login" />} />

@@ -9,7 +9,6 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-aspect-ratio": "^1.1.1",
@@ -41,6 +40,7 @@
     "react-router-dom": "^7.1.5",
     "react-toastify": "^11.0.3",
     "recharts": "^2.15.1",
+    "shadcn": "^2.4.0-canary.12",
     "sonner": "^1.7.4",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",

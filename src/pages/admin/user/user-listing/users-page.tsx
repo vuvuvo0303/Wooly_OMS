@@ -59,7 +59,7 @@ const UsersListingPage = () => {
     {
       accessorKey: "phoneNumber",
       header: "Số điện thoại",
-      cell: (info) => info.getValue() || "N/A",
+      cell: (info) => info.getValue() || "Chưa có",
     },
     {
       accessorKey: "role",

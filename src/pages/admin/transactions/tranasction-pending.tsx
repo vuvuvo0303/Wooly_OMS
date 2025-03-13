@@ -91,15 +91,13 @@ const TranasctionPending = () => {
                   <TableCell className="text-gray-900">{transaction.userName}</TableCell>
                   <TableCell className="text-gray-900">{transaction.paymentMethod}</TableCell>
                   <TableCell>
-                    <Badge className="bg-red-600 text-white">
-                      {transaction.status}
-                    </Badge>
+                    <Badge className="bg-red-600 text-white">{transaction.status}</Badge>
                   </TableCell>
                   <TableCell className="text-gray-600">
-                    {new Date(transaction.createdAt).toLocaleString("vi-VN")}
+                  {transaction.createdAt}
                   </TableCell>
                   <TableCell className="text-gray-600">
-                    {new Date(transaction.updatedAt).toLocaleString("vi-VN")}
+                  {transaction.updatedAt}
                   </TableCell>
                 </TableRow>
               ))}
