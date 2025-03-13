@@ -134,7 +134,7 @@ export const columns: ColumnDef<Product>[] = [
             parts.map((part, partIndex) => (
               <div key={partIndex}>
                 <span className="font-semibold">{part.partName}:</span>{" "}
-                {part.partColors.length > 0 ? (
+                {(part.partColors || []).length > 0 ? (
                   part.partColors.map((color, colorIndex) => {
                     const bgColor = color.partColor.toLowerCase(); // Chuyển thành lowercase để tránh sai màu
                     const textColor = ["black", "blue", "red", "purple", "brown"].includes(bgColor) ? "#FFF" : "#000"; // Chữ trắng nếu nền tối, chữ đen nếu nền sáng
@@ -162,7 +162,6 @@ export const columns: ColumnDef<Product>[] = [
     },
     size: 100,
   },
-
   {
     id: "actions",
     cell: ({ row }) => {
@@ -179,7 +178,7 @@ export const columns: ColumnDef<Product>[] = [
             <DropdownMenuSeparator />
             <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="p-0">
               <Link to={`/product/${product.productID}/edit`} className="w-full">
-                <Button className="w-full text-center  px-4 py-2 bg-blue-500 hover:bg-blue-500">
+                <Button className="w-full text-center px-4 py-2 bg-blue-500 hover:bg-blue-500">
                   Cập nhật
                 </Button>
               </Link>

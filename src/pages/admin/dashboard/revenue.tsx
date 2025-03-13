@@ -15,7 +15,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { formatCurrencyVND } from "@/lib/currency";
-import { getchart } from "@/lib/api/statics-api";
+import { getChart } from "@/lib/api/statics-api";
 
 const chartConfig = {
   revenue: {
@@ -33,7 +33,7 @@ const Revenue = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await getchart();
+      const { data, error } = await getChart();
       if (!error && data) {
         const transformedData = [
           "January",
