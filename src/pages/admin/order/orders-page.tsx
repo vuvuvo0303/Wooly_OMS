@@ -6,6 +6,7 @@ import { Order } from "@/types/order";
 import ToolsPanel from "./tools-panel";
 import { useEffect, useState } from "react";
 import { getLatestOrders } from "@/lib/api/order-api";
+import Loader from "@/components/loader";
 const OrdersPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<Order[]>([]);
@@ -14,7 +15,7 @@ const OrdersPage = () => {
       setLoading(true);
       const response = await getLatestOrders();
       console.log(response);
-      
+
       if (response.data && response.data.data) {
         setData(
           response.data.data.map((item) => ({
@@ -22,7 +23,7 @@ const OrdersPage = () => {
             customerPhone: item.customerPhone,
             customerAddress: item.customerAddress,
             totalPrice: item.totalPrice,
-            user:item.user,
+            user: item.user,
             orderDate: item.orderDate,
             cancelled: item.cancelled,
           }))
@@ -30,7 +31,6 @@ const OrdersPage = () => {
       } else {
         console.error("Dữ liệu API không hợp lệ:", response);
       }
-      
     } catch (error) {
       console.error("Lỗi khi gọi API:", error);
     } finally {
@@ -46,7 +46,14 @@ const OrdersPage = () => {
       <Header title="Tổng quan" href="/" currentPage="Danh sách đơn hàng" />
       <div className="p-5 flex-1 overflow-auto">
         <ToolsPanel />
-        {loading ? <p className="text-center">Đang tải dữ liệu...</p> : <DataTable columns={columns} data={data} />}
+        {loading ? (
+          <div className="text-center">
+            {" "}
+            <Loader />
+          </div>
+        ) : (
+          <DataTable columns={columns} data={data} />
+        )}
       </div>
     </div>
   );
