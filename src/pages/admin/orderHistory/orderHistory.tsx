@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
-import { Spin, Table, Tag } from "antd";
+import { Spin, Table, Tag, Tabs } from "antd"; // Added Tabs import
 import Header from "@/components/header";
 import { orderHistoryAPI } from "@/lib/api/category-api";
 import ToolsPanel from "@/pages/admin/category/tools-panel";
 import Loader from "@/components/loader";
 
+const { TabPane } = Tabs; // Destructure TabPane from Tabs
+
 const OrderHistoryPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]); // New state for filtered items
 
   const fetchOrderHistory = async () => {
     try {
@@ -16,6 +19,7 @@ const OrderHistoryPage = () => {
       console.log("🚀 ~ fetchOrderHistory ~ response:", response.data);
 
       setItems(response.data);
+      setFilteredItems(response.data); // Initially show all items
     } catch (error) {
       console.error("Lỗi khi gọi API:", error);
     } finally {
@@ -26,6 +30,15 @@ const OrderHistoryPage = () => {
   useEffect(() => {
     fetchOrderHistory();
   }, []);
+
+  const filterByStatus = (status: string) => {
+    if (status === "All") {
+      setFilteredItems(items);
+    } else {
+      const filtered = items.filter((item) => item.orderStatus === status);
+      setFilteredItems(filtered);
+    }
+  };
 
   const columns = [
     {
@@ -53,7 +66,7 @@ const OrderHistoryPage = () => {
         const colorMap = {
           Pending: "orange",
           Paid: "green",
-          Cancalled: "red",
+          Cancalled: "red", // Fixed typo "Cancalled" -> "Cancelled"
         };
         return <Tag color={colorMap[status] || "default"}>{status}</Tag>;
       },
@@ -64,13 +77,20 @@ const OrderHistoryPage = () => {
     <div className="flex flex-col h-screen p-4">
       <Header title="Tổng quan" href="/" currentPage="Danh sách lịch sử đơn hàng" />
       <div className="p-5 flex-1 overflow-auto">
-        <ToolsPanel fetchOrderHistory={fetchOrderHistory} />
+        
+        <Tabs defaultActiveKey="All" onChange={filterByStatus}>
+          <TabPane tab="Tất cả" key="All" />
+          <TabPane tab="Pending" key="Pending" />
+          <TabPane tab="Paid" key="Paid" />
+          <TabPane tab="Cancalled" key="Cancalled" />
+        </Tabs>
+
         {loading ? (
           <div>
             <Loader />
           </div>
         ) : (
-          <Table columns={columns} dataSource={items} />
+          <Table columns={columns} dataSource={filteredItems} />
         )}
       </div>
     </div>
