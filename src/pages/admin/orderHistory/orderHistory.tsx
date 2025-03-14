@@ -11,15 +11,17 @@ const OrderHistoryPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]); // New state for filtered items
-
   const fetchOrderHistory = async () => {
     try {
       setLoading(true);
       const response = await orderHistoryAPI();
       console.log("🚀 ~ fetchOrderHistory ~ response:", response.data);
 
-      setItems(response.data);
-      setFilteredItems(response.data); // Initially show all items
+      // Sort items by orderDate (newest first) before setting state
+      const sortedItems = response.data.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+
+      setItems(sortedItems);
+      setFilteredItems(sortedItems); // Initially show all sorted items
     } catch (error) {
       console.error("Lỗi khi gọi API:", error);
     } finally {
@@ -83,8 +85,6 @@ const OrderHistoryPage = () => {
           year: "numeric",
         });
       },
-      sorter: (a, b) => new Date(b.orderDate) - new Date(a.orderDate), // Sort newest first
-      defaultSortOrder: "descend", // Set default sort order to descending
     },
   ];
 
