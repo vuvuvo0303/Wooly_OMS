@@ -45,6 +45,7 @@ const MainContainer = () => {
           element={isAuthenticated() ? <UpdateProductPage /> : <Navigate to="/login" />}
         />
         <Route path="/order" element={isAuthenticated() ? <OrdersPage /> : <Navigate to="/login" />} />
+        <Route path="/orderHistory" element={isAuthenticated() ? <OrderHistoryPage /> : <Navigate to="/login" />} />
         <Route path="/order/:orderId" element={isAuthenticated() ? <OrderDetailPage /> : <Navigate to="/login" />} />
         <Route path="/category" element={isAuthenticated() ? <CategoriesPage /> : <Navigate to="/login" />} />
 
