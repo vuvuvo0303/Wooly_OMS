@@ -71,13 +71,27 @@ const OrderHistoryPage = () => {
         return <Tag color={colorMap[status] || "default"}>{status}</Tag>;
       },
     },
+    {
+      title: "Ngày đặt hàng",
+      dataIndex: "orderDate",
+      key: "orderDate",
+      render: (orderDate) => {
+        const date = new Date(orderDate);
+        return date.toLocaleDateString("vi-VN", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        });
+      },
+      sorter: (a, b) => new Date(b.orderDate) - new Date(a.orderDate), // Sort newest first
+      defaultSortOrder: "descend", // Set default sort order to descending
+    },
   ];
 
   return (
     <div className="flex flex-col h-screen p-4">
       <Header title="Tổng quan" href="/" currentPage="Danh sách lịch sử đơn hàng" />
       <div className="p-5 flex-1 overflow-auto">
-        
         <Tabs defaultActiveKey="All" onChange={filterByStatus}>
           <TabPane tab="Tất cả" key="All" />
           <TabPane tab="Pending" key="Pending" />
