@@ -49,10 +49,10 @@ const data = {
                     title: "Sản phẩm",
                     url: "/product",
                 },
-                {
-                    title: "Đơn đặt hàng",
-                    url: "/order",
-                },
+                // {
+                //     title: "Đơn đặt hàng",
+                //     url: "/order",
+                // },
                 {
                     title: "Loại sản phẩm len",
                     url: "/category",

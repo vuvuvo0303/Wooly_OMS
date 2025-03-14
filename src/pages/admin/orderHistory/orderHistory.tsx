@@ -3,6 +3,7 @@ import { Spin, Table, Tag } from "antd";
 import Header from "@/components/header";
 import { orderHistoryAPI } from "@/lib/api/category-api";
 import ToolsPanel from "@/pages/admin/category/tools-panel";
+import Loader from "@/components/loader";
 
 const OrderHistoryPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -64,7 +65,13 @@ const OrderHistoryPage = () => {
       <Header title="Tổng quan" href="/" currentPage="Danh sách lịch sử đơn hàng" />
       <div className="p-5 flex-1 overflow-auto">
         <ToolsPanel fetchOrderHistory={fetchOrderHistory} />
-        {loading ? <p className="text-center">Đang tải dữ liệu...</p> : <Table columns={columns} dataSource={items} />}
+        {loading ? (
+          <div>
+            <Loader />
+          </div>
+        ) : (
+          <Table columns={columns} dataSource={items} />
+        )}
       </div>
     </div>
   );
