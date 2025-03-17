@@ -14,7 +14,7 @@ const WellcomeDashborad = () => {
   const [thoiGian, setThoiGian] = useState(new Date());
   const [viTri, setViTri] = useState("Đang tải...");
   const [tenNguoiDung, setTenNguoiDung] = useState("Admin");
-  const [mua, setMua] = useState("Xuân");
+  const [mua, setMua] = useState(" Mùa Xuân");
   const [iconMua, setIconMua] = useState(<Flower className="w-5 h-5 text-pink-400" />);
 
   useEffect(() => {
@@ -72,16 +72,16 @@ const WellcomeDashborad = () => {
     const thang = new Date().getMonth() + 1;
 
     if (thang >= 3 && thang <= 5) {
-      setMua("Xuân");
+      setMua("Mùa Xuân");
       setIconMua(<Flower className="w-5 h-5 text-pink-400" />);
     } else if (thang >= 6 && thang <= 8) {
-      setMua("Hè");
+      setMua(" Mùa Hè");
       setIconMua(<Sun className="w-5 h-5 text-yellow-500" />);
     } else if (thang >= 9 && thang <= 11) {
-      setMua("Thu");
+      setMua(" Mùa Thu");
       setIconMua(<Leaf className="w-5 h-5 text-orange-500" />);
     } else {
-      setMua("Đông");
+      setMua("Mùa Đông");
       setIconMua(<Snowflake className="w-5 h-5 text-blue-500" />);
     }
   }, []);
@@ -95,7 +95,7 @@ const WellcomeDashborad = () => {
         className="absolute inset-0 w-full h-full pointer-events-none"
       />
 
-      <Card className="relative w-full px-4 shadow-md bg-white bg-opacity-90 ">
+      <Card className="relative w- h-full px-4 shadow-md bg-white bg-opacity-80 ">
         <CardContent className="p-0">
           <div>
             <div className="w-full flex justify-center">
