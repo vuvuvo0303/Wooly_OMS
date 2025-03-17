@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar } from "antd";
-import { Sun, Moon, MapPin, Leaf, Snowflake, Flower } from "lucide-react"; // Thêm icon mùa
+import { Sun, Moon, MapPin, Leaf, Snowflake, Flower } from "lucide-react";
+import Lottie from "lottie-react";
+import cherryBlossomAnimation from "@/assets/cherry_blossom.json"; // Thêm hiệu ứng hoa đào
+
 import wooly_logo from "@/assets/images/wooly_logo.png";
-import vietnam_flag from "@/assets/images/vietnam_flag .jpg"; // Sửa lỗi khoảng trắng trong tên file
+import vietnam_flag from "@/assets/images/vietnam_flag .jpg";
 
 const WellcomeDashborad = () => {
   const [loiChao, setLoiChao] = useState("Chào buổi chiều");
@@ -11,7 +14,7 @@ const WellcomeDashborad = () => {
   const [thoiGian, setThoiGian] = useState(new Date());
   const [viTri, setViTri] = useState("Đang tải...");
   const [tenNguoiDung, setTenNguoiDung] = useState("Admin");
-  const [mua, setMua] = useState("Mùa Xuân");
+  const [mua, setMua] = useState("Xuân");
   const [iconMua, setIconMua] = useState(<Flower className="w-5 h-5 text-pink-400" />);
 
   useEffect(() => {
@@ -34,13 +37,13 @@ const WellcomeDashborad = () => {
       const gio = hienTai.getHours();
 
       if (gio >= 6 && gio < 12) {
-        setLoiChao("Chào buổi sáng");
+        setLoiChao("Good morning");
         setIcon(<Sun className="w-6 h-6 text-yellow-500" />);
       } else if (gio >= 18 || gio < 6) {
-        setLoiChao("Chào buổi tối");
+        setLoiChao("Good night");
         setIcon(<Moon className="w-6 h-6 text-blue-500" />);
       } else {
-        setLoiChao("Chào buổi chiều");
+        setLoiChao("Good afternoon");
         setIcon(<Sun className="w-6 h-6 text-orange-500" />);
       }
     }, 1000);
@@ -69,23 +72,30 @@ const WellcomeDashborad = () => {
     const thang = new Date().getMonth() + 1;
 
     if (thang >= 3 && thang <= 5) {
-      setMua("Mùa Xuân");
+      setMua("Xuân");
       setIconMua(<Flower className="w-5 h-5 text-pink-400" />);
     } else if (thang >= 6 && thang <= 8) {
-      setMua(" MùaHè");
+      setMua("Hè");
       setIconMua(<Sun className="w-5 h-5 text-yellow-500" />);
     } else if (thang >= 9 && thang <= 11) {
-      setMua("Mùa Thu");
+      setMua("Thu");
       setIconMua(<Leaf className="w-5 h-5 text-orange-500" />);
     } else {
-      setMua("Mùa Đông");
+      setMua("Đông");
       setIconMua(<Snowflake className="w-5 h-5 text-blue-500" />);
     }
   }, []);
 
   return (
-    <div className="col-span-4">
-      <Card className="w-full px-4 shadow-md bg-white rounded-lg">
+    <div className="relative col-span-4">
+      {/* Hiệu ứng hoa đào bay */}
+      <Lottie
+        animationData={cherryBlossomAnimation}
+        loop
+        className="absolute inset-0 w-full h-full pointer-events-none"
+      />
+
+      <Card className="relative w-full px-4 shadow-md bg-white bg-opacity-90 ">
         <CardContent className="p-0">
           <div>
             <div className="w-full flex justify-center">
@@ -119,7 +129,7 @@ const WellcomeDashborad = () => {
               </div>
 
               {/* Mùa và icon mùa */}
-              <div className="flex justify-center items-center pt-2 pb-16">
+              <div className="flex justify-center items-center pb-16 mt-2">
                 {iconMua}
                 <span className="ml-2 text-gray-700 text-sm font-semibold">{mua}</span>
               </div>
