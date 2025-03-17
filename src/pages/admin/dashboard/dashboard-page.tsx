@@ -4,6 +4,7 @@ import Revenue from "./revenue";
 import BestSelling from "./best-selling";
 import DailyRevenue from "./daily-revenue";
 import CategorySalesPieChart from "./category-sales-pie-chart";
+import WelcomeDashboard from "./wellcome-dashborad";
 
 const DashboardPage = () => {
   return (
@@ -11,10 +12,13 @@ const DashboardPage = () => {
       <Header title="Tổng quan" href="/" currentPage="Dashboard" />
       <div className="grid grid-cols-12 gap-5 p-5">
         <Overview />
-        <Revenue />
-        <BestSelling />
+
         <DailyRevenue />
         <CategorySalesPieChart />
+        <WelcomeDashboard />
+
+        <Revenue />
+        <BestSelling />
       </div>
     </div>
   );
