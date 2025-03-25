@@ -108,7 +108,7 @@ const WellcomeDashborad = () => {
               <div className="flex justify-center items-center space-x-2">
                 {icon}
                 <span className="text-yellow-600 text-xl font-serif">{loiChao}, </span>
-                <span className="text-green-400 font-semibold text-xl">{tenNguoiDung}</span>
+                <span className="text-green-400 font-mono text-xl">{tenNguoiDung}</span>
               </div>
 
               <div className="mt-2 text-gray-600 text-sm">

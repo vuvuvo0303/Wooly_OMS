@@ -12,7 +12,7 @@ createRoot(document.getElementById("root")!).render(
       <App />
       <Sonner />
       <ToastContainer />
-      {/* <SplashCursor /> */}
+      <SplashCursor />
 
     </BrowserRouter>
   </StrictMode>
