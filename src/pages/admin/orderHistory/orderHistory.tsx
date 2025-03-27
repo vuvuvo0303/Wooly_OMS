@@ -13,6 +13,8 @@ const OrderHistoryPage = () => {
   const [filteredItems, setFilteredItems] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedItemList, setSelectedItemList] = useState([]);
+  const [isCustomerModalVisible, setIsCustomerModalVisible] = useState(false); // Modal mới cho thông tin khách hàng
+  const [selectedCustomer, setSelectedCustomer] = useState(null); // Lưu thông tin khách hàng được chọn
 
   const fetchOrderHistory = async () => {
     try {
@@ -56,11 +58,33 @@ const OrderHistoryPage = () => {
     setIsModalVisible(false);
   };
 
+  // Hàm hiển thị modal thông tin khách hàng
+  const showCustomerModal = (customer) => {
+    setSelectedCustomer(customer);
+    setIsCustomerModalVisible(true);
+  };
+
+  const handleCustomerModalOk = () => {
+    setIsCustomerModalVisible(false);
+  };
+
+  const handleCustomerModalCancel = () => {
+    setIsCustomerModalVisible(false);
+  };
+
   const columns = [
     {
       title: "Tên khách hàng",
       dataIndex: "customerName",
       key: "customerName",
+      render: (text, record) => (
+        <span
+          style={{ cursor: "pointer", color: "#1890ff" }}
+          onClick={() => showCustomerModal(record)} // Gọi hàm hiển thị modal khi nhấn vào tên
+        >
+          {text}
+        </span>
+      ),
     },
     {
       title: "Tổng giá tiền",
@@ -137,11 +161,9 @@ const OrderHistoryPage = () => {
       dataIndex: "partList",
       key: "partList",
       render: (partList) => {
-        // Kiểm tra nếu partList không tồn tại hoặc rỗng
         if (!partList || partList.length === 0) {
           return <span>Không có</span>;
         }
-        // Nếu có partList, hiển thị danh sách bộ phận
         return partList.map((part) => (
           <div key={part.orderDetailPartId}>
             {part.name}: <Tag color={part.color.toLowerCase()}>{part.color}</Tag>
@@ -170,6 +192,7 @@ const OrderHistoryPage = () => {
           <Table columns={columns} dataSource={filteredItems} />
         )}
 
+        {/* Modal danh sách sản phẩm */}
         <Modal
           title="Chi tiết danh sách sản phẩm"
           visible={isModalVisible}
@@ -183,6 +206,30 @@ const OrderHistoryPage = () => {
             pagination={false}
             rowKey="orderDetailId"
           />
+        </Modal>
+
+        {/* Modal thông tin khách hàng */}
+        <Modal
+          title="Thông tin khách hàng"
+          visible={isCustomerModalVisible}
+          onOk={handleCustomerModalOk}
+          onCancel={handleCustomerModalCancel}
+          width={500}
+        >
+          {selectedCustomer && (
+            <div>
+              <p>
+                <strong style={{ color: "#1890ff" }}>Tên khách hàng:</strong>{" "}
+                {selectedCustomer.customerName}
+              </p>
+              <p>
+                <strong>Địa chỉ:</strong> {selectedCustomer.customerAddress}
+              </p>
+              <p>
+                <strong>Ghi chú:</strong> {selectedCustomer.customerNote || "Không có"}
+              </p>
+            </div>
+          )}
         </Modal>
       </div>
     </div>
